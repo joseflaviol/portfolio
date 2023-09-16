@@ -14,9 +14,13 @@ def project_page(request, id: int):
 class CreateProjectView(View):
     
     def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect("index")
         return render(request, "create.html")
     
     def post(self, request):
+        if not request.user.is_authenticated:
+            return redirect("index")
         title       = request.POST["title"]
         subtitle    = request.POST["subtitle"]
         description = request.POST["description"]
