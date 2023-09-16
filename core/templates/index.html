@@ -1,5 +1,3 @@
-{% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% url 'asset' 'style_css' %}">
     <title>José Flávio - Portfolio</title>
 </head>
 
 <body>
     <br>
     <div class="ui raised very padded text container segment" id="app">
-        <img class="ui centered small circular image" src="{% static 'images/joseflavio.jpg' %}">
+        <img class="ui centered small circular image" src="{% url 'asset' 'joseflavio_jpg' %}">
         <h1 class="ui centered header">
             José Flávio
             <div class="sub header">Estudante de Ciência da Computação</div>
@@ -113,7 +111,7 @@
             {% endfor %}
         </div>
         <div class="ui divider"></div>
-        <a href="{% static 'curriculo.pdf' %}" download target="_blank" class="ui button" style="background-color: wheat; color: black"><i
+        <a href="{% url 'asset' 'curriculo_pdf' %}" download target="_blank" class="ui button" style="background-color: wheat; color: black"><i
                 class="download icon"></i>Baixar
             currículo</a>
         <a href="https://github.com/joseflaviol/" target="_blank" class="ui button" style="background-color: wheat; color: black">
