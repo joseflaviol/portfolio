@@ -1,0 +1,25 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>{{ project.title }}</title>
+</head>
+
+<body>
+    <br>
+    <div class="ui raised very padded text container segment" id="app">
+        <button onclick="history.back()" class="ui icon button">
+            <i class="arrow left icon"></i>
+        </button>
+
+        {{project.description|safe}}
+    </div>
+</body>
+
+</html>

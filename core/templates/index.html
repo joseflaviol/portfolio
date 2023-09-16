@@ -1,0 +1,164 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>José Flávio - Portfolio</title>
+</head>
+
+<body>
+    <br>
+    <div class="ui raised very padded text container segment" id="app">
+        <img class="ui centered small circular image" src="{% static 'images/joseflavio.jpg' %}">
+        <h1 class="ui centered header">
+            José Flávio
+            <div class="sub header">Estudante de Ciência da Computação</div>
+            <div class="sub header">Aspirante a desenvolvedor backend</div>
+        </h1>
+        <div class="ui three item menu" style="background-color: wheat">
+            <a class="item" :class="{ active: aboutMe }" v-on:click="changeTo('aboutMe')" id="aboutMe">Sobre mim</a>
+            <a class="item" :class="{ active: academic }" v-on:click="changeTo('academic')" id="academic">Formação
+                Acadêmica</a>
+            <a class="item" :class="{ active: projects }" v-on:click="changeTo('projects')" id="projects">Meus
+                Projetos</a>
+        </div>
+        <div class="ui divider"></div>
+        <div class="ui styled fluid accordion" v-if="aboutMe">
+            <div v-bind:class="{ active: accordionItems[0], title: true }" v-on:click="changeAccordion(0)">
+                <i class="dropdown icon"></i>
+                Quem sou eu?
+            </div>
+            <div v-bind:class="{ active: accordionItems[0], content: true }">
+                <p>Meu nome é José Flávio Lopes.</p>
+                <p>Sou um estudante de Ciência da Computação e apaixonado por programação e inteligência computacional.
+                </p>
+                <p>Atualmente, estou buscando oportunidades para aplicar e ampliar meus conhecimentos em projetos
+                    inovadores.</p>
+                <p>Tenho um histórico de 1 ano de experiência em pesquisa acadêmica, onde desenvolvi habilidades em
+                    meta-heurísticas e familiaridade com problemas NP-Completos.</p>
+                <p>Estou sempre aberto a novas oportunidades de aprendizado e colaboração, então sinta-se à vontade para
+                    entrar em contato comigo em: <a href="mailto:jose.flavio@sou.unifal-mg.edu.br"
+                        target="_blank">jose.flavio@sou.unifal-mg.edu.br</a></p>
+
+            </div>
+            <div v-bind:class="{ active: accordionItems[1], title: true }" v-on:click="changeAccordion(1)">
+                <i class="dropdown icon"></i>
+                Objetivos
+            </div>
+            <div v-bind:class="{ active: accordionItems[1], content: true }">
+                <p>Estou em busca de um estágio na área de desenvolvimento backend ou aprendizado de máquina. Busco uma
+                    oportunidade para aplicar meus conhecimentos em programação e contribuir efetivamente com projetos
+                    inovadores e adquirir experiência prática.</p>
+            </div>
+            <div class="title" v-bind:class="{ active: accordionItems[2] }" v-on:click="changeAccordion(2)">
+                <i class="dropdown icon"></i>
+                Interesses
+            </div>
+            <div class="content" v-bind:class="{ active: accordionItems[2] }">
+                <p>Tenho interesse em <b>Grafos</b>, <b>Aprendizado de Máquina</b>, <b>Arquitetura de Software</b>,
+                    <b>Algoritmos e Estruturas de Dados</b>.
+                </p>
+                <p>Tive experiência com um ano de iniciação científica, onde trabalhei com problemas <i>NP-Completos</i>
+                    e meta-heurísticas, o que me despertou muito interesse na área de otimização combinatória.</p>
+            </div>
+            <div class="title" v-bind:class="{ active: accordionItems[3] }" v-on:click="changeAccordion(3)">
+                <i class="dropdown icon"></i>
+                Curiosidades
+            </div>
+            <div class="content" v-bind:class="{ active: accordionItems[3] }">
+                <p>Pratico capoeira e taekwondo. Já disputei campeonatos de basquete, mas hoje em dia não tenho
+                    praticado. Também jogo xadrez, mas não participo de torneios (ainda).</p>
+                <p>Gosto muito de filmes, tendo Wong Kar-Wai como meu diretor favorito. Também gosto de ler,
+                    principalmente romances que abordam a psicologia humana, como nos livros de Dostoiévski e Graciliano
+                    Ramos.</p>
+            </div>
+        </div>
+        <div class="ui list" v-if="academic">
+            <div class="item">
+                <i class="certificate icon"></i>
+                <div class="content">
+                    <a class="header">Bacharelado em Ciência da Computação</a>
+                    <div class="description">Universidade Federal de Alfenas, Alfenas - MG, 2020 - Presente
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <i class="certificate icon"></i>
+                <div class="content">
+                    <a class="header">Técnico em Informática</a>
+                    <div class="description">IFSULDEMINAS, Inconfidentes - MG, 2016 - 2018</div>
+                </div>
+            </div>
+        </div>
+        <div class="ui cards" v-if="projects">
+            {% for project in projects %}
+            <div class="card">
+                <div class="content">
+                    <div class="header">{{project.title}}</div>
+                    <div class="description">
+                        {{project.subtitle}}
+                    </div>
+                </div>
+                <a href="{% url 'project_page' project.id %}" class="ui bottom attached button"
+                    style="background-color: wheat;">
+                    <i class="add icon"></i>
+                    Ver mais
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="ui divider"></div>
+        <a href="{% static 'curriculo.pdf' %}" download target="_blank" class="ui button" style="background-color: wheat; color: black"><i
+                class="download icon"></i>Baixar
+            currículo</a>
+        <a href="https://github.com/joseflaviol/" target="_blank" class="ui button" style="background-color: wheat; color: black">
+            <i class="github icon"></i>
+            GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/joseflaviol/" target="_blank" class="ui button" style="background-color: wheat; color: black">
+            <i class="linkedin icon"></i>
+            LinkedIn
+        </a>
+        <a href="mailto:jose.flavio@sou.unifal-mg.edu.br" target="_blank" class="ui button" style="background-color: wheat; color: black">
+            <i class="envelope icon"></i>
+            Email
+        </a>
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            delimiters: ['[', ']'],
+            data: {
+                aboutMe: true,
+                academic: false,
+                projects: false,
+                accordionItems: [false, false, false, false]
+            },
+            methods: {
+                changeTo: function (section) {
+                    this.aboutMe = section === 'aboutMe';
+                    this.academic = section === 'academic';
+                    this.projects = section === 'projects';
+                },
+                changeAccordion: function (idx) {
+                    for (let i = 0; i < this.accordionItems.length; i++) {
+                        this.accordionItems[i] = i == idx && !this.accordionItems[i];
+                    }
+                    this.$forceUpdate();
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
